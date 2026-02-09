@@ -11,3 +11,12 @@ def calculate_future_assets(initial_asset, interest_rate, inflation_rate, years)
         'nominal': int(nominal_asset),
         'real': int(real_asset)
     }
+
+def predict_income_growth(current_income, study_hours, growth_coefficient):
+    """
+    学習時間に基づいた予測年収を計算する
+    予測年収 = 現在の年収 + (学習時間 * 成長係数)
+    """
+    predicted_income = current_income + (study_hours * growth_coefficient)
+    return predicted_income
+            

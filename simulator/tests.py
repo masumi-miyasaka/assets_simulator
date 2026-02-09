@@ -22,3 +22,19 @@ class AssetCaluculationTest(TestCase):
         # 誤差を考慮して assertAlmostEqual を使います
         self.assertAlmostEqual(result['nominal'], 1628894)
         self.assertAlmostEqual(result['real'], 1336260, delta=1)
+
+    def test_income_growth_by_learning(self):
+        """
+        学習進捗（人的資本への投資）に応じた年収成長のテスト
+        初期年収500万, 学習時間1000時間, 成長係数(係数)0.1 の場合
+        予測年収 = 500 + (1000 * 0.1) = 600万
+        """
+        from .logic import predict_income_growth
+
+        current_income = 5000000
+        study_hours = 1000
+        growth_coeffcient = 100
+
+        predicted_income = predict_income_growth(current_income, study_hours, growth_coeffcient)
+
+        self.assertEqual(predicted_income, 5100000)
