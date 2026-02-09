@@ -38,3 +38,12 @@ class AssetCaluculationTest(TestCase):
         predicted_income = predict_income_growth(current_income, study_hours, growth_coeffcient)
 
         self.assertEqual(predicted_income, 5100000)
+    
+from django.urls import reverse
+
+class SimulatorViewTest(TestCase):
+    def test_simulator_page_loads(self):
+        """シミュレーターの入力画面が正しく表示されるかテスト"""
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Asset Simulator")
