@@ -5,12 +5,12 @@
         <title>Asset Simulator</title>
     </head>
     <body>
-        <h1>Strategic Asset & Humman Capital Simulator</h1>
-        <from method=""post">
+        <h1>Strategic Asset & Human Capital Simulator</h1>
+        <form method="post">
             {% csrf_token%}
             {{ form.as_p }}
             <button type="submit">Calculate</button>
-        </from>
+        </form>
 
         {% if results %}
             <hr>
