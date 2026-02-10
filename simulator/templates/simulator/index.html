@@ -6,6 +6,17 @@
     </head>
     <body>
         <h1>Strategic Asset & Humman Capital Simulator</h1>
-        <p>Asset Simulator is loading...</p>
+        <from method=""post">
+            {% csrf_token%}
+            {{ form.as_p }}
+            <button type="submit">Calculate</button>
+        </from>
+
+        {% if results %}
+            <hr>
+            <h2>Results</h2>
+            <p>Nominal Asset: {{ results.nominal|floatformat:"g" }}</p>
+            <p>Real Asset: {{ results.real|floatformat:"g" }}</p>
+        {% endif %}
     </body>
 </html>

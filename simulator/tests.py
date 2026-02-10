@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 # Create your tests here.
-class AssetCaluculationTest(TestCase):
+class AssetCalculationTest(TestCase):
     def test_basic_asset_calculation(self):
         """
         基本の名目資産と実質資産の計算をテスト
@@ -33,9 +33,9 @@ class AssetCaluculationTest(TestCase):
 
         current_income = 5000000
         study_hours = 1000
-        growth_coeffcient = 100
+        growth_coefficient = 100
 
-        predicted_income = predict_income_growth(current_income, study_hours, growth_coeffcient)
+        predicted_income = predict_income_growth(current_income, study_hours, growth_coefficient)
 
         self.assertEqual(predicted_income, 5100000)
     
@@ -47,3 +47,18 @@ class SimulatorViewTest(TestCase):
         response = self.client.get(reverse('index'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Asset Simulator")
+    
+    def test_simulator_calculation(self):
+        """フォーム入力後に計算結果が表示されるかテスト"""
+        data = {
+            'initial_asset': 1000000,
+            'interest_rate': 0.05,
+            'inflation_rate': 0.02,
+            'years': 10
+        }
+        # indexページに対してデータをPOST
+        response = self.client.post(reverse('index'), data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '1,628,894')
+        self.assertContains(response, '1,336,260')
